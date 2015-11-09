@@ -1,0 +1,824 @@
+/**
+
+ * mixin for wibone
+ * Author: webinspire
+ * Author URI: http://dev.webinsipre.it/wibone
+ * Version: 1.9.3
+ * Last update: 23.06.2015
+ 
+*/
+
+.Body(@bg-color, @link-color ){
+	font-family:@font-body;
+	background-color:@footer-bg;
+	
+	a{
+		color:@link-color;
+		&:hover{
+			color:darken(@link-color,10%);	
+		}
+		&.link{
+			color:darken(@link-color,0%);
+			background-color:transparent;
+			&:hover{
+				color:darken(@link-color,10%);
+				background-color:transparent;
+			}
+		}
+	}
+	h1, h2, h3, h4, h5, h6{
+		font-family:@font-title;
+	}
+	a.wi-go-top{
+		background-color:darken(@link-color,10%);
+		color:lighten(@link-color,100%);
+		&:hover{
+			background-color:darken(@link-color,20%);
+			color:lighten(@link-color,100%);
+		}
+	}
+	.no-brd{
+		border-color:transparent;
+	}
+	.divider,
+	hr{
+		  border-top-color:darken(@container-bg, 20%);
+		  border-bottom-color:lighten(@container-bg, 35%);
+	}
+	.modal.fade {
+		background-color:@modal-backdrop-bg;
+	}
+}
+
+.Header(@header-bg, @header-link){
+	background-color:@header-bg;
+	color:fadeout(@header-link, 25%);
+	.open-toggle,
+	.open-toggle-right{
+		color:@header-link;
+		background-color:darken(@header-bg, 8%);
+	}
+}
+
+.Container(@container-bg){
+	background-color:@container-bg;
+}
+
+.Footer(@footer-bg, @footer-link){
+	background-color:@footer-bg;
+	color:fadeout(@footer-link, 25%);
+	a{
+		color:@footer-link;
+	}
+	hr{
+		border-top-color:darken(@footer-bg, 15%);
+		border-bottom-color:lighten(@footer-bg, 15%);
+	}
+}
+
+.ColorSetNav(@bg-color,@link-color) {
+	ul li{
+		a{
+		color:@color-dark;
+		background-color:transparent;
+			&:hover{
+				color:darken(@color-dark, 10%);
+				background-color:darken(@color-default, 5%);
+			}
+		}
+		&.open > a,
+		&.open > a:hover,
+		&.current-menu-item > a,
+		&.current-menu-item > a:hover,
+		&.current-page-ancestor > a,
+		&.current-page-ancestor > a:hover,
+		a.highlighted,
+		a.highlighted:hover{
+			color:darken(@bg-color, 0%);
+			background-color:darken(@link-color, 0%);
+		}
+		ul{
+			background-color:@bg-color;
+			border:none;
+			li{
+				a{
+				color:darken(@color-default, 55%);
+				background-color:transparent;
+					&:hover,
+					&.highlighted,
+					&.highlighted:hover{
+						color:@color-dark;
+						background-color:@color-default;
+					}
+					&.link:hover{
+						background-color:transparent;
+					}
+				}
+				&.open > a,
+				&.open > a:hover,
+				&.current-menu-item > a,
+				&.current-menu-item > a:hover,
+				&.current-page-ancestor > a,
+				&.current-page-ancestor > a:hover{
+					color:darken(@link-color, 20%);
+					background-color:fadeout(@link-color, 90%);
+				}
+			}
+		}
+		@media only screen and (min-width: 785px){
+			ul{
+				box-shadow:0 5px 12px darken(@color-default, 25%);
+			}
+		}
+	}
+	&.vertical-nav ul li ul{
+		box-shadow:none;
+	}
+}
+
+.ColorSetNavInverse(@bg-color,@link-color) {
+	color:@bg-color;
+	background-color:@link-color;
+	a{
+	color:@bg-color;
+	background-color:@link-color;
+		&:hover{
+			color:@bg-color;
+			background-color:darken(@link-color, 5%);
+		}
+	}
+	ul li{
+		a{
+		color:@bg-color;
+		background-color:@link-color;
+			&:hover{
+				color:@bg-color;
+				background-color:darken(@link-color, 5%);
+			}
+		}
+		&.open > a,
+		&.open > a:hover,
+		&.current-menu-item > a,
+		&.current-menu-item > a:hover,
+		&.current-page-ancestor > a,
+		&.current-page-ancestor > a:hover,
+		a.highlighted,
+		a.highlighted:hover{
+			color:darken(@link-color, 6%);
+			background-color:@bg-color;
+		}
+		ul{
+			background-color:darken(@link-color, 6%);
+			border:none;
+			box-shadow:none;
+			li{
+				a{
+				color:@color-white;
+				background-color:transparent;
+					&:hover,
+					&.highlighted,
+					&.highlighted:hover{
+						color:@color-white;
+						//background-color:fadeout(@link-color, 90%);
+						background-color:darken(@link-color, 8%);
+					}
+					&.link:hover{
+						background-color:transparent;
+					}
+				}
+				&.open > a,
+				&.open > a:hover,
+				&.current-menu-item > a,
+				&.current-menu-item > a:hover,
+				&.current-page-ancestor > a,
+				&.current-page-ancestor > a:hover{
+					color:darken(@link-color, 6%);
+					background-color:@bg-color;
+				}
+			}
+		}
+	}
+}
+
+.ColorSetNone() {
+  background-color:transparent;
+  border-color:transparent;
+}
+
+.ColorSet(@color) {
+  color:darken(@color, 70%) ;
+  background-color:@color;
+  border-color:darken(@color, 15%);
+	a{
+		color:darken(@color, 80%);
+		&:hover{
+			color:darken(@color, 100%);
+		}
+		&.link{
+			color:darken(@color, 80%);
+			&:hover{
+			color:darken(@color, 100%);
+			}
+		}
+	}
+}
+
+
+.ColorSetInverse(@color) {
+  color:lighten(@color, 100%) ;
+  background-color:@color;
+  border-color:darken(@color, 7%);
+	a{
+		color:lighten(@color, 70%);
+		&:hover{
+			color:lighten(@color, 100%);
+		}
+	}
+}
+
+.Button(@btn-color, @btn-radius){
+	background-color:@btn-color;
+	color:darken(@btn-color, 85%);
+	border-color:darken(@btn-color, 10%);
+	border-radius:@btn-radius;
+	&:hover,
+	&.active{
+		background-color:lighten(@btn-color, 2%);
+		border-color:darken(@btn-color, 15%);
+		color:darken(@btn-color, 85%);
+		box-shadow:0 0 5px darken(@btn-color, 10%);
+	}
+}
+
+.ButtonInverse(@btn-color, @btn-radius){
+	background-color:@btn-color;
+	color:lighten(@btn-color, 85%);
+	border-color:darken(@btn-color, 3%);
+	border-radius:@btn-radius;
+	&:hover,
+	&.active{
+		background-color:darken(@btn-color, 3%);
+		color:lighten(@btn-color, 100%);
+		box-shadow:none;
+	}
+}
+
+.Alert(@color){
+	background-color:@color;
+	color:darken(@color, 80%);
+	border-color:darken(@color, 12%);
+	border-radius:3px;
+	a{
+		color:darken(@color, 20%);
+		&:hover{
+			color:darken(@color, 50%);
+		}
+	}
+}
+
+.AlertInverse(@color){
+	background-color:fadeout(@color, 90%);
+	color:darken(@color, 8%);
+	border-color:fadeout(@color, 70%);
+	border-radius:3px;
+	a{
+		color:fadein(@color, -60%);
+		&:hover{
+			color:darken(@color, 8%);
+		}
+	}
+}
+
+.Accordion(@color, @color-active){
+	.wi-collapse-item{
+		border-color:darken(@color, 10%);
+		.wi-collapse-heading{
+			a{
+				color:darken(@color, 80%);
+				background-color:@color;
+				&:hover{
+					color:darken(@color, 90%);
+					background-color:darken(@color, 2%);
+				}
+				i{
+					color:darken(@color, 90%);
+				}
+			}
+		}
+	}
+}
+
+.AccordionInverse(@color, @color-active){
+	.wi-collapse-item{
+		border-color:darken(@color, 10%);
+		.wi-collapse-heading{
+			a{
+				color:@color-white;
+				background-color:@color;
+				&:hover{
+					color:@color-white;
+					background-color:darken(@color, 2%);
+				}
+				i{
+					color:@color-white;
+				}
+			}
+		}
+	}
+}
+
+.ModalColor(){
+	.modal-header{
+		background-color:@modal-header-bg;
+		color:#fff;
+	}
+	.modal-body {
+		background-color:@modal-content-bg;
+	}
+	.modal-footer{
+		background-color:@modal-footer-bg;
+	}
+}
+
+.TabsDefault(@color, @color-txt){
+	li a span{
+		background-color:@color;
+		color:@color-txt;
+		border-color:darken(@color, 3%);
+		&:hover{
+			background-color:darken(@color, 5%);
+		}
+	}
+}
+
+.TabsArea(@color, @color-txt){
+	background-color:@color;
+	color:@color-txt;
+	border-color:darken(@color, 15%);
+}
+
+.TabsActive(@color, @color-txt){
+	.active a span {
+		background-color:@color;
+		color:@color-txt;
+		border-color:darken(@color, 15%);
+		border-bottom-color:@color ;
+		&:hover{
+			background-color:@color;
+			color:@color-txt;
+			border-color:darken(@color, 15%);
+			border-bottom-color:@color ;
+		}
+	}
+}
+
+.Carousel(@color, @color-txt, @brd-radius){
+	.carousel-control{
+		span{
+			background-color:@color;
+		i{
+			color: @color-txt;
+		}
+		}
+	}
+	.carousel-indicators{
+		li{
+			border-radius: @brd-radius;
+		}
+	}
+}
+
+.FormDefault(@color){
+	input[type=text],
+	input[type=search],
+	input[type=date],
+	input[type=time],
+	input[type=password],
+	input[type=email],
+	input[type=number],
+	input[type="file"],
+	select,
+	textarea{
+		background-color:lighten(@color, 5%);
+		border-color:darken(@color, 12%);
+		color:darken(@color, 80%);
+		&:focus{
+			background-color:lighten(@color, 100%);
+			box-shadow:0 0 5px darken(@color, 15%);
+		}
+		&.error{
+			border-color:fadein(@color-error, -50%);
+			box-shadow:0 0 5px fadein(@color-error, -60%);
+		}
+		&.valid{
+			border-color:fadein(@color-success, -50%);
+			box-shadow:0 0 5px fadein(@color-success, -60%);
+		}
+	}
+	fieldset{
+		background-color:lighten(@color, 1%);
+		border-color:darken(@color, 13%);
+	}
+	label{
+		&.error{
+			color:@color-error;
+		}
+	}
+	.label-add-on{
+		background-color:@color;
+		border-color:darken(@color, 12%);
+		color:darken(@color, 80%);
+	}
+}
+
+.DropDown(@color){
+	.dropdown-menu{
+		background-color:lighten(@color,40%);
+		color:darken(@color, 85%);
+		border-color:darken(@color, 10%);
+		color:darken(@color, 100%);
+		li a{
+			color:darken(@color, 80%);
+			background-color:lighten(@color, 100%);
+			&:hover{
+				color:darken(@color, 100%);
+				background-color:@color;
+			}
+		}
+		li.selected a{
+			color:lighten(@color,80%);
+			background-color:@color-primary;
+		}
+	}
+	@media only screen and (min-width: 785px){
+		.dropdown-menu{
+			box-shadow:0 5px 12px darken(@color-default, 25%);
+		}
+	}
+}
+
+.ScrollBarDefault(@color, @color-active){
+	background-color:darken(@color, 3%);
+	.mCSB_dragger .mCSB_dragger_bar,
+	.mCSB_dragger_onDrag .mCSB_dragger_bar,
+	.mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{
+		background-color: @color-active;
+	}
+	.mCSB_draggerRail{
+		background-color: lighten(@color, 40%);
+	}
+	a.mCSB_buttonUp,
+	a.mCSB_buttonDown,
+	a.mCSB_buttonLeft,
+	a.mCSB_buttonRight{
+		color: @color-active;
+	}
+}
+
+.TableDefault(@color, @color-active){
+	thead,
+	tfoot{
+		background-color:@color-active;
+		color:lighten(@color, 40%);
+	}
+	tbody tr.selected,
+	tbody tr.selected:hover {
+  	background-color: lighten(@color-active, 70%);
+	}
+	tbody tr.selected,
+	tbody tr.selected-before{
+		border-color:lighten(@color-active, 50%);
+	}
+	tbody tr,
+	tbody tr.table-scroll,
+	tbody tr.table-scroll:hover{
+		background-color:lighten(@color, 40%);
+	}
+	tbody tr{
+		background-color:lighten(@color, 40%);
+		color:darken(@color, 85%);
+		border-color:darken(@color, 3%);
+	}
+	tbody tr:hover,
+	tbody tr:hover.selected{
+		background-color:lighten(@color,3%);
+	}
+}
+
+.TableData(@color, @color-active){
+	thead,
+	tfoot{
+		background-color:transparent;
+	}
+	
+	.dataTables_scrollHead,
+	.dataTables_scrollFoot{
+		background-color:@color-active;
+		color:lighten(@color, 40%)
+	}
+	
+	.dataTables_paginate{
+		
+		a{
+			color:darken(@color-active, 50%);
+			&.paginate_button:hover{
+				background-color:lighten(@color, 40%);
+				color:darken(@color-active, 80%);
+			}
+			&.paginate_button.previous:hover,
+			&.paginate_button.next:hover{
+				background-color:transparent;
+			}
+			&.paginate_button.current{
+				background-color:darken(@color-active, 8%);
+				color:lighten(@color, 40%)
+				
+			}
+		}
+	}
+}
+
+.Popover(@bg-color, @brd-radius){
+	background-color: @bg-color;
+    border-color:darken(@bg-color, 17%);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	color:darken(@bg-color, 80%);
+	border-radius: @brd-radius;
+	.popover-title{
+		background-color: darken(@bg-color, 3%);
+		border-bottom: 1px solid darken(@bg-color, 17%);
+		border-radius: @brd-radius @brd-radius 0 0;
+	}
+	&.top > .arrow {	
+		border-top-color: darken(@bg-color, 17%);
+		&::after{
+			border-top-color: @bg-color;
+		}
+	}
+	&.right > .arrow {
+		border-right-color: darken(@bg-color, 17%);
+		&::after{
+			border-right-color: @bg-color;
+		}
+	}
+	&.bottom > .arrow {
+		border-bottom-color: darken(@bg-color, 17%);
+		&::after{
+			border-bottom-color: @bg-color;
+		}
+	}
+	&.left > .arrow {	
+		border-left-color: darken(@bg-color, 17%);
+		&::after{
+			border-left-color: @bg-color;
+		}
+	}
+}
+
+.PopoverInverse(@bg-color){
+	background-color: @bg-color;
+    border: 1px solid darken(@bg-color, 10%);
+    box-shadow: 0 5px 10px darken(@bg-color, 10%);
+	.popover-title{
+		background-color: darken(@bg-color, 3%);
+		border-bottom: 1px solid darken(@bg-color, 10%);
+	}
+	&.top > .arrow {	
+		border-top-color: darken(@bg-color, 10%);
+		&::after{
+			border-top-color: @bg-color;
+		}
+	}
+	&.right > .arrow {
+		border-right-color: darken(@bg-color, 10%);
+		&::after{
+			border-right-color: @bg-color;
+		}
+	}
+	&.bottom > .arrow {
+		border-bottom-color: darken(@bg-color, 10%);
+		&::after{
+			border-bottom-color: @bg-color;
+		}
+	}
+	&.left > .arrow {	
+		border-left-color: darken(@bg-color, 10%);
+		&::after{
+			border-left-color: @bg-color;
+		}
+	}
+}
+
+.Pagination(@bg-color, @color, @bg-active, @color-active){
+	> li > a,
+	> li > span {
+	  color: @color;
+	  background-color: @bg-color;
+	  border:1px solid darken(@bg-color, 15%);
+	}
+	
+	> li > a,
+	> li > span {
+	&:hover,
+	&:focus {
+	  background-color: darken(@bg-color, 5%);
+	}
+	}
+	
+	> .active > a,
+	> .active > span {
+	&,
+	&:hover,
+	&:focus {
+	  z-index: 2;
+	  color: #fff;
+	  background-color: @bg-active;
+	  border-color: darken(@bg-active, 5%);
+	  color:@color-active;
+	}
+	}
+	
+	> .disabled {
+	> span,
+	> span:hover,
+	> span:focus,
+	> a,
+	> a:hover,
+	> a:focus {
+	  color:fade(@color, 50%);
+	  background-color: @bg-color;
+	  cursor: not-allowed;
+	}
+	}
+}
+
+.Pager(@bg-color, @color, @bg-hover, @color-hover){
+  li {
+    > a,
+    > span {
+		color:@color;
+		background-color: @bg-color;
+		border-color:darken(@bg-color, 15%);
+    }
+    > a:hover,
+    > a:focus {
+		color:@color-hover;
+		background-color: @bg-hover;
+		border-color: darken(@bg-hover, 15%);
+    }
+  }
+  .disabled {
+    > a,
+    > a:hover,
+    > a:focus,
+    > span {
+		color:@color;
+		background-color: @bg-color;
+		border-color:darken(@bg-color, 15%);
+    }
+  }
+}
+
+.DateTimePicker(@bg-color, @color, @bg-active, @color-active){
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	background-color:@bg-color;
+	color:@color;
+	box-shadow:0 0 5px #ccc;
+	border:1px solid darken(@bg-color, 15%);
+	&:before{
+		border-bottom:7px solid darken(@bg-color, 10%);
+	}
+	&:after{
+		border-bottom:6px solid @bg-color;
+	}
+	.timepicker-picker{
+		.wi-btn{
+			background-color:@bg-active;
+			color:@color-active;
+			border-color:darken(@bg-active, 3%);
+			border-radius:@btn-radius;
+			&:hover{
+				background-color:darken(@bg-active, 3%);
+				color:@color-active;
+			}
+		}
+	}
+	.picker-switch{
+		a{
+			color:@color;
+			border-color:darken(@bg-color, 10%);
+		}
+	}
+	table{
+		width:100%;
+		margin:0;
+		td,
+		th{
+			-webkit-border-radius:4px;
+			-moz-border-radius:4px;
+			border-radius:4px;
+			&.day:hover,
+			&.hour:hover,
+			&.minute:hover,
+			&.second:hover{
+				background:darken(@bg-color, 10%);
+				color:@color;
+			}
+		}
+		td{
+			&.old,
+			&.new{
+				color:fade(@color, 50%);
+			}
+			
+			&.current{
+				span{
+					color:@color-dark;
+					background-color:fade(@color-warning, 10%);
+				}
+			}
+			&.active,
+			&.active:hover{
+				color:@color-active;
+				background-color:@bg-active;
+				span{
+					color:@color-active;
+					background-color:@bg-active;
+				}
+			}
+			&.active:hover,
+			&.active:hover:hover,
+			&.active:active,
+			&.active:hover:active,
+			&.active.active,
+			&.active:hover.active,
+			&.active.disabled,
+			&.active:hover.disabled,
+			&.active[disabled],
+			&.active:hover[disabled]{
+				color:@color-active;
+				background-color:@bg-active;
+			}
+			&.active:active,
+			&.active:hover:active,
+			&.active.active,
+			&.active:hover.active{
+				color:@color-active;
+				background-color:@bg-active;
+			}
+			&.disabled,
+			&.disabled:hover{
+				color:fade(@color, 50%);
+			}
+			span{
+				-webkit-border-radius:4px;
+				-moz-border-radius:4px;
+				border-radius:4px;
+				&:hover{
+					background:darken(@bg-color, 10%);
+				}
+				&.active,
+				&.active:active,
+				&.active.active,
+				&.active:hover,
+				&.active:active,
+				&.active.active,
+				&.active.disabled,
+				&.active[disabled]{
+					color:@color-active;
+					background-color:@bg-active;
+				}
+				&.old{
+					color:fade(@color, 50%);
+				}
+				&.disabled,
+				&.disabled:hover{
+					color:fade(@color, 50%);
+				}
+			}
+		}
+		th{
+			&.disabled,
+			&.disabled:hover{
+				color:fade(@color, 50%);
+			}	
+		}
+		thead{
+			tr{
+				&:first-child{
+					th{
+						&.next,
+						&.prev{
+							cursor:pointer;
+							&:hover{
+								background:transparent;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
