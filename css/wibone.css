@@ -868,27 +868,27 @@ ul {
 .wi-alert-message p {
   margin: 0;
 }
-.alert-ico:before {
+.alert-ico::before {
   font-family: FontAwesome;
   display: inline-block;
   margin-right: 10px;
 }
-.wi-alert-message .alert-ico:before {
+.wi-alert-message .alert-ico::before {
   content: "\f075";
 }
-.wi-alert-message.alert-info .alert-ico:before {
+.wi-alert-message.alert-info .alert-ico::before {
   content: "\f05a";
 }
-.wi-alert-message.alert-success .alert-ico:before {
+.wi-alert-message.alert-success .alert-ico::before {
   content: "\f058";
 }
-.wi-alert-message.alert-warning .alert-ico:before {
+.wi-alert-message.alert-warning .alert-ico::before {
   content: "\f06a";
 }
-.wi-alert-message.alert-error .alert-ico:before {
+.wi-alert-message.alert-error .alert-ico::before {
   content: "\f056";
 }
-a.wi-alert-close:before {
+a.wi-alert-close::before {
   display: block;
   position: absolute;
   right: 8px;
@@ -1192,6 +1192,9 @@ ul.type-circle li::before {
   content: "\f10c";
   font-size: 9px;
   margin-top: 1px;
+}
+.pippo-open {
+  background-color: #fc0;
 }
 .modal-open {
   overflow: hidden;
@@ -1846,9 +1849,13 @@ legend {
   padding: 0 12px;
 }
 .wi-sz-l > input[type="text"],
+.wi-sz-l > input[type="email"],
+.wi-sz-l > input[type="number"],
+.wi-sz-l > input[type="search"],
 .wi-sz-l > input[type="password"],
 .wi-sz-l > input[type="date"],
 .wi-sz-l > input[type="time"],
+.wi-sz-l > input[type="file"],
 .wi-sz-l > select,
 .wi-sz-l > .label-add-on,
 .wi-sz-l > .btn-add-on > .wi-btn {
@@ -1858,9 +1865,13 @@ legend {
   padding: 10px 16px;
 }
 .wi-sz-s > input[type="text"],
+.wi-sz-s > input[type="email"],
+.wi-sz-s > input[type="number"],
+.wi-sz-s > input[type="search"],
 .wi-sz-s > input[type="password"],
 .wi-sz-s > input[type="date"],
 .wi-sz-s > input[type="time"],
+.wi-sz-s > input[type="file"],
 .wi-sz-s > select,
 .wi-sz-s > .label-add-on,
 .wi-sz-s > .btn-add-on > .wi-btn {
@@ -1883,6 +1894,7 @@ textarea {
 }
 .cascade-form input[type="text"],
 .cascade-form input[type="search"],
+.cascade-form input[type="number"],
 .cascade-form input[type="date"],
 .cascade-form input[type="time"],
 .cascade-form input[type="password"],
@@ -1935,10 +1947,15 @@ input[type=radio]:checked + label:before {
   border-collapse: separate;
   display: table;
   position: relative;
+  width: 100%;
 }
 .form-item input[type=text],
+.form-item input[type=email],
+.form-item input[type=search],
+.form-item input[type=number],
 .form-item input[type=password],
 .form-item input[type=date],
+.form-item input[type=file],
 .form-item input[type=time] {
   display: table-cell;
   z-index: 2;
@@ -1969,9 +1986,13 @@ input[type=radio]:checked + label:before {
 .form-item .label-add-on,
 .form-item .btn-add-on,
 .form-item input[type=text],
+.form-item input[type=email],
+.form-item input[type=search],
+.form-item input[type=number],
 .form-item input[type=password],
 .form-item input[type=date],
 .form-item input[type=time],
+.form-item input[type=file],
 .form-item select {
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
@@ -1995,16 +2016,24 @@ input[type=radio]:checked + label:before {
 .label-add-on:not(:first-child):not(:last-child),
 .btn-add-on:not(:first-child):not(:last-child),
 .form-item input[type="text"]:not(:first-child):not(:last-child),
+.form-item input[type="email"]:not(:first-child):not(:last-child),
+.form-item input[type="number"]:not(:first-child):not(:last-child),
 .form-item input[type="password"]:not(:first-child):not(:last-child),
 .form-item input[type="date"]:not(:first-child):not(:last-child),
 .form-item input[type="time"]:not(:first-child):not(:last-child),
+.form-item input[type="search"]:not(:first-child):not(:last-child),
+.form-item input[type="file"]:not(:first-child):not(:last-child),
 .form-item select:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
 .form-item input[type="text"]:first-child,
+.form-item input[type="email"]:first-child,
+.form-item input[type="number"]:first-child,
 .form-item input[type="password"]:first-child,
 .form-item input[type="date"]:first-child,
 .form-item input[type="time"]:first-child,
+.form-item input[type="search"]:first-child,
+.form-item input[type="file"]:first-child,
 .form-item select:first-child,
 .label-add-on:first-child,
 .btn-add-on:first-child > .wi-btn,
@@ -2016,9 +2045,13 @@ input[type=radio]:checked + label:before {
   border-top-right-radius: 0;
 }
 .form-item input[type="text"]:last-child,
+.form-item input[type="email"]:last-child,
+.form-item input[type="number"]:last-child,
 .form-item input[type="password"]:last-child,
 .form-item input[type="date"]:last-child,
 .form-item input[type="time"]:last-child,
+.form-item input[type="search"]:last-child,
+.form-item input[type="file"]:last-child,
 .form-item select:last-child,
 .label-add-on:last-child,
 .btn-add-on:last-child > .wi-btn,
@@ -2035,9 +2068,13 @@ input[type=radio]:checked + label:before {
 }
 .form-item .label-add-on:not(:first-child):not(:last-child),
 .form-item input[type=text]:not(:first-child):not(:last-child),
+.form-item input[type=email]:not(:first-child):not(:last-child),
+.form-item input[type=number]:not(:first-child):not(:last-child),
 .form-item input[type=password]:not(:first-child):not(:last-child),
 .form-item input[type=date]:not(:first-child):not(:last-child),
 .form-item input[type=time]:not(:first-child):not(:last-child),
+.form-item input[type=search]:not(:first-child):not(:last-child),
+.form-item input[type=file]:not(:first-child):not(:last-child),
 .form-item select:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
