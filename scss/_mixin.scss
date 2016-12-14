@@ -1,0 +1,938 @@
+// mixin
+
+// 01 BODY        02 HEADER        03 FOOTER         04 CONTAINER        05 NAVIGATION
+
+// 06 COLORSET   07 BUTTON         08 ALERT         09 DATEPICKER            10 ACCORDION             
+
+// 11 MODAL      12 TABS            13 CAROUSEL         14 FORM     15 DROPDOWN    16 SCROLLBAR    17 TABLE     18 PAGINATION      19 PAGER
+
+// 20 DATETIMEPICKER
+
+
+//ANIMATION
+@mixin Transition($duration){
+  -webkit-transition: all $duration ease;
+    -moz-transition   : all $duration ease;
+    -o-transition     : all $duration ease;
+    -ms-transition    : all $duration ease;
+    transition        : all $duration ease;
+}
+@mixin Animation($type, $duration){
+  -webkit-animation: $type $duration;
+  -moz-animation   : $type $duration;
+  -o-animation     : $type $duration;
+    -ms-animation    : $type $duration;
+    animation        : $type $duration;
+}
+
+//BODY
+@mixin Body($bg-color, $link-color, $font-body ){
+  font-family:$font-body;
+  background-color:$bg-color;
+  
+  a{
+    color:$link-color;
+    &:hover{
+      color:darken($link-color,10%);  
+    }
+    &.link{
+      color:darken($link-color,0%);
+      background-color:transparent;
+      &:hover{
+        color:darken($link-color,10%);
+        background-color:transparent;
+      }
+    }
+  }
+  h1, h2, h3, h4, h5, h6{
+    font-family:$font-primary;
+  }
+  a.wi-go-top{
+    background-color:darken($link-color,10%);
+    color:lighten($link-color,100%);
+    &:hover{
+      background-color:darken($link-color,20%);
+      color:lighten($link-color,100%);
+    }
+  }
+  .no-brd{
+    border-color:transparent;
+  }
+  .divider,
+  hr{
+      border-top-color:darken($container-bg, 20%);
+      border-bottom-color:lighten($container-bg, 35%);
+  }
+  .modal.fade {
+    background-color:$modal-backdrop-bg;
+  }
+}
+
+//HEADER
+@mixin Header($header-bg, $header-link){
+  background-color:$header-bg;
+  color: rgba( $header-link, .8 );
+  .wi-brand a,
+  .open-toggle{
+    color:$header-link;
+  }
+}
+
+//CONTAINER
+@mixin Container($container-bg){
+  background-color:$container-bg;
+}
+
+//FOOTER
+@mixin Footer($footer-bg, $footer-link){
+  background-color:$footer-bg;
+  color:rgba($footer-link, .5);
+  a{
+    color: $footer-link;
+  }
+  .wi-brand a{
+      color:$footer-link;
+  }
+  .divider,
+  hr{
+    border-top-color:darken($footer-bg, 15%);
+    border-bottom-color: lighten($footer-bg, 10%) ;
+  }
+}
+
+//NAVIGATION
+@mixin ColorSetNav($bg-color,$link-color) {
+  ul li{
+    a{
+    color:$color-dark;
+    background-color:transparent;
+      &:hover{
+        color:darken($color-dark, 10%);
+        background-color:darken($color-default, 5%);
+      }
+    }
+    &.open > a,
+    &.open > a:hover,
+    &.current-menu-item > a,
+    &.current-menu-item > a:hover,
+    &.current-page-ancestor > a,
+    &.current-page-ancestor > a:hover,
+    a.highlighted,
+    a.highlighted:hover{
+      color:darken($bg-color, 0%);
+      background-color:darken($link-color, 0%);
+    }
+    ul{
+      background-color:$bg-color;
+      border:none;
+      li{
+        a{
+        color:darken($color-default, 55%);
+        background-color:transparent;
+          &:hover,
+          &.highlighted,
+          &.highlighted:hover{
+            color:$color-dark;
+            background-color:$color-default;
+          }
+          &.link:hover{
+            background-color:transparent;
+          }
+        }
+        &.open > a,
+        &.open > a:hover,
+        &.current-menu-item > a,
+        &.current-menu-item > a:hover,
+        &.current-page-ancestor > a,
+        &.current-page-ancestor > a:hover{
+          color:darken($link-color, 20%);
+          background-color: rgba( $link-color, .2 );
+        }
+      }
+    }
+    @media only screen and (min-width: 785px){
+      ul{
+        box-shadow:0 5px 12px darken($color-default, 25%);
+      }
+    }
+  }
+  &.vertical-nav ul li ul{
+    box-shadow:none;
+  }
+}
+
+//NAVIGATION INVERSE
+@mixin ColorSetNavInverse($bg-color, $link-color, $bg-color-active, $link-color-active) {
+  color:$link-color;
+  background-color:$bg-color;
+  a{
+    @include Transition(.3s);
+    color:$link-color;
+    background-color:$bg-color;
+      &:hover{
+        color:$link-color;
+        background-color:transparent;
+      }
+    }
+  ul{
+    li{
+      a{
+      color:$link-color;
+      background-color:$bg-color;
+        &:hover{
+          color:$link-color;
+          background-color:darken($bg-color, 10%);
+        }
+      }
+      &.open > a,
+      &.open > a:hover,
+      &.current-menu-item > a,
+      &.current-menu-item > a:hover,
+      &.current-page-ancestor > a,
+      &.current-page-ancestor > a:hover,
+      a.highlighted,
+      a.highlighted:hover{
+        color:$link-color-active;
+        background-color:$bg-color-active;
+      }
+      ul{
+
+        background-color:$bg-color-active;
+        border:none;
+        box-shadow:none;
+        li{
+          a{
+          color:$link-color;
+          background-color:transparent;
+            &:hover,
+            &.highlighted,
+            &.highlighted:hover{
+              color:$link-color;
+              background-color:$bg-color;
+            }
+            &.link:hover{
+              background-color:transparent;
+            }
+          }
+          &.open > a,
+          &.open > a:hover,
+          &.current-menu-item > a,
+          &.current-menu-item > a:hover,
+          &.current-page-ancestor > a,
+          &.current-page-ancestor > a:hover{
+            color:$link-color;
+            background-color:$bg-color;
+          }
+          ul{
+            background-color:$bg-color;
+            li{
+              a{
+                color:$link-color;
+                background-color:transparent;
+                &:hover,
+                &.highlighted,
+                &.highlighted:hover{
+                  color:$link-color-active;
+                  background-color:$bg-color-active;
+                }
+                &.link:hover{
+                  background-color:transparent;
+                }
+              }
+              &.open > a,
+              &.open > a:hover,
+              &.current-menu-item > a,
+              &.current-menu-item > a:hover,
+              &.current-page-ancestor > a,
+              &.current-page-ancestor > a:hover{
+                color:$link-color-active;
+                background-color:$bg-color-active;
+              }
+            }
+          }
+        }
+        &.dropdown-menu{
+          background-color: $color-white;
+          color:$color-dark;
+          box-shadow: 0 0 5px darken($color-default, 5%);
+          a{
+            color: $color-primary;
+          }
+        }   
+      }
+    }
+    //DROPDOWN
+    /*.DropDown($bg-color){
+      .dropdown-menu{
+        background-color:lighten($bg-color,40%);
+        color:darken($bg-color, 85%);
+        border-color:darken($bg-color, 10%);
+        color:darken($bg-color, 100%);
+        li{
+          a{
+            color:darken($bg-color, 80%);
+            background-color:lighten($bg-color, 100%);
+            &:hover{
+              color:darken($bg-color, 100%);
+              background-color:$bg-color;
+            }
+          }
+          &.selected{
+            a{
+              color:lighten($bg-color,80%);
+              background-color:$bg-color;
+            }
+          }
+        }
+
+      }
+      @media only screen and (min-width: 785px){
+        .dropdown-menu{
+          box-shadow:0 5px 12px darken($color-default, 25%);
+        }
+      }
+    }*/
+  }
+}
+
+//CLEAR COLORSET
+@mixin ColorSetNone() {
+  background-color:transparent;
+  border-color:transparent;
+}
+
+//COLORSET
+@mixin ColorSet($color) {
+  color:darken($color, 70%) ;
+  background-color:$color;
+  border-color:darken($color, 15%);
+  a{
+    color:darken($color, 80%);
+    &:hover{
+      color:darken($color, 100%);
+    }
+    &.link{
+      color:darken($color, 80%);
+      &:hover{
+      color:darken($color, 100%);
+      }
+    }
+  }
+}
+
+//COLORSET INVERSE
+@mixin ColorSetInverse($color) {
+  color:lighten($color, 100%) ;
+  background-color:$color;
+  border-color:darken($color, 7%);
+  a{
+    color:lighten($color, 70%);
+    &:hover{
+      color:lighten($color, 100%);
+    }
+  }
+}
+
+//BUTTON
+@mixin Button($bg-default, $label-default, $bg-active, $label-active, $brd-width, $brd-color, $btn-radius){
+  background-color:$bg-default;
+  color           :$label-default;
+  border-width    :$brd-width;
+  border-style    :solid;
+  border-color    :$brd-color;
+  border-radius   :$btn-radius;
+  @include Transition(.4s);
+  &:hover,
+  &.active{
+    background-color:$bg-active;
+    color           :$label-active;
+    border-color    :darken($brd-color, 10%);
+  }
+}
+
+@mixin ButtonOutLine($label-default, $bg-active, $label-active, $btn-radius, $brd-width, $brd-style, $brd-color){
+  background-color:transparent;
+  color           :$label-default;
+  border-width    :$brd-width;
+  border-style    :$brd-style;
+  border-color    :$brd-color;
+  border-radius   :$btn-radius;
+  @include Transition(.4s);
+  &:hover,
+  &.active{
+    background-color:$bg-active;
+    color           :$label-active;
+  }
+}
+
+//SHADOW
+@mixin Shadow($h-shadow, $v-shadow, $blur, $spread, $color, $type){
+  box-shadow        :$h-shadow $v-shadow $blur $spread $color $type;
+  -webkit-box-shadow:$h-shadow $v-shadow $blur $spread $color $type;
+  -moz-box-shadow   :$h-shadow $v-shadow $blur $spread $color $type;
+}
+
+//ALERT
+@mixin Alert($color){
+  background-color:$color;
+  color:darken($color, 80%);
+  border-color:darken($color, 12%);
+  border-radius:3px;
+  a{
+    color:darken($color, 20%);
+    &:hover{
+      color:darken($color, 50%);
+    }
+  }
+}
+
+
+//ALERT INVERSE
+@mixin AlertInverse($color){
+  background-color: rgba( $color, .2 );
+  color:darken($color, 8%);
+  border-color: rgba( $color, .4 );
+  border-radius:3px;
+  a{
+    color:rgba($color, .6);
+    &:hover{
+      color:darken($color, 8%);
+    }
+  }
+}
+
+//DATEPICKER
+@mixin DatePicker(){
+  background-color: #ffffff;
+    border-color: #d9d9d9;
+    color: #333333;
+  a {
+    color: #191919;
+    &.ui-datepicker-next-hover,
+    &.ui-datepicker-prev-hover{
+      color: #191919;
+    }
+  
+    &:hover {
+      color: #000000;
+    }
+  }
+  
+  label {
+    color: #000000;
+  }
+  
+  .divider {
+    border-bottom-color: #ffffff;
+    border-top-color: #e6e6e6;
+  }
+  
+  .ui-state-default {
+    background-color: #eeeeee;
+    border-color: #d5d5d5;
+    color: #222222;
+    display: block;
+    margin: 1px;
+    padding: 2px 4px;
+  }
+  
+  .ui-state-default a {
+    color: #080808;
+  }
+  
+  .ui-state-default:hover {
+    color: #000000;
+  }
+  
+  .ui-state-default label {
+    color: #000000;
+  }
+  
+  .ui-state-default .divider {
+    border-bottom-color: #ffffff;
+    border-top-color: #d5d5d5;
+  }
+  
+  .ui-state-hover,
+  .ui-state-active{
+    background-color: #0e2230;
+    border-color: #020609;
+    color: #ffffff;
+  }
+  
+  .ui-state-hover a {
+    color: #e0edf6;
+  }
+  
+  .ui-state-hover:hover {
+    color: #ffffff;
+  }
+  
+  .ui-state-hover label {
+    color: #ffffff;
+  }
+  
+  .ui-state-hover .divider {
+    border-bottom-color: #1a3e57;
+    border-top-color: #020609;
+  }
+}
+
+//ACCORDION
+@mixin Accordion($bg-color, $color, $bg-active, $color-active, $bg-content, $color-content, $brd-width){
+  .wi-collapse-item{
+    border-color:darken($bg-color, 10%);
+    border-width: $brd-width;
+    border-style: solid;
+    .wi-collapse-heading{
+      a{
+        &.collapsed{
+          color:$color;
+          background-color:$bg-color;
+          &:hover{
+            color:darken($color, 2%);
+            background-color:darken($bg-color, 2%);
+          }
+        }
+        color:$color-active;
+        background-color:$bg-active;
+        &:hover{
+          color:$color-active;
+          background-color:$bg-active;
+        }
+      }
+    }
+    &.collapse{
+      &.in{
+        border-color:darken($bg-active, 10%);
+      }
+    }
+    .wi-collapse-content{
+      background-color: $bg-content;
+      color: $color-content;
+    }
+    &:last-child{
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+
+//MODAL
+@mixin ModalColor($header-bg, $header-txt, $content-bg, $content-txt, $footer-bg, $footer-txt){
+  .modal-header{
+    background-color:$header-bg;
+    color:$header-txt;
+    border-bottom: 1px solid fade($header-txt, 10%);
+  }
+  .modal-body {
+    background-color:$content-bg;
+    color:$content-txt;
+  }
+  .modal-footer{
+    background-color:$footer-bg;
+    color:$footer-txt;
+  }
+}
+
+//TABS
+@mixin TabsDefault($color, $color-txt){
+  li a span{
+    background-color:$color;
+    color:$color-txt;
+    border-color: transparent;
+    &:hover{
+      background-color:darken($color, 5%);
+    }
+  }
+}
+
+@mixin TabsArea($color, $color-txt){
+  background-color:$color;
+  color:$color-txt;
+  border-color:darken($color, 15%);
+}
+
+@mixin TabsActive($color, $color-txt){
+  .active a span {
+    background-color:$color;
+    color:$color-txt;
+    border-color:darken($color, 15%);
+    border-bottom-color:$color ;
+    &:hover{
+      background-color:$color;
+      color:$color-txt;
+      border-color:darken($color, 15%);
+      border-bottom-color:$color ;
+    }
+  }
+}
+
+//CAROUSEL
+@mixin Carousel($color, $color-txt){
+  .carousel-control{
+    span{
+      background-color:$color;
+    i{
+      color: $color-txt;
+    }
+    }
+  }
+}
+
+//FORM
+@mixin FormDefault($color){
+  input[type=text],
+  input[type=search],
+  input[type=date],
+  input[type=time],
+  input[type=password],
+  input[type=email],
+  input[type=number],
+  input[type="file"],
+  select,
+  textarea{
+    background-color:$color;
+    border-color:darken($color, 15%);
+    color:darken($color, 80%);
+    &:focus{
+      box-shadow:0 0 5px darken($color, 15%);
+    }
+    &.error{
+      border-color:fadein($color-accent, -50%);
+      box-shadow:0 0 5px fadein($color-accent, -60%);
+    }
+    &.valid{
+      border-color:fadein($color-success, -50%);
+      box-shadow:0 0 5px fadein($color-success, -60%);
+    }
+  }
+  fieldset{
+    background-color:darken($color, 5%);
+    border-color:darken($color, 13%);
+  }
+  label{
+    &.error{
+      color:$color-accent;
+    }
+  }
+  .label-add-on{
+    background-color:darken($color, 3%);
+    border-color:darken($color, 15%);
+    color:darken($color, 80%);
+  }
+}
+
+//DROPDOWN
+@mixin DropDown($bg-color, $txt-color){
+  .dropdown-menu{
+    background-color:$bg-color;
+    color:fade($txt-color, 80%);
+    border-color:$bg-color;
+    li a{
+      color:$txt-color;
+      background-color:$bg-color;
+      &:hover{
+        color:$txt-color;
+        background-color:darken($bg-color, 10%);
+      }
+    }
+    li.selected a{
+      color:$txt-color;
+      background-color:darken($bg-color, 10%);
+    }
+  }
+  @media only screen and (min-width: 785px){
+    .dropdown-menu{
+      box-shadow:0 5px 12px darken($color-default, 25%);
+    }
+  }
+}
+
+//SCROLLBAR
+@mixin ScrollBarDefault($color, $color-active){
+  background-color:darken($color, 3%);
+  .mCSB_dragger .mCSB_dragger_bar,
+  .mCSB_dragger_onDrag .mCSB_dragger_bar,
+  .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{
+    background-color: $color-active;
+  }
+  .mCSB_draggerRail{
+    background-color: lighten($color, 40%);
+  }
+  a.mCSB_buttonUp,
+  a.mCSB_buttonDown,
+  a.mCSB_buttonLeft,
+  a.mCSB_buttonRight{
+    color: $color-active;
+  }
+}
+
+//TABLE
+@mixin TableDefault($color, $bg-color, $brd-color){
+  thead,
+  tfoot{
+    background-color:$bg-color;
+    color:$color;
+  }
+  tbody tr.selected,
+  tbody tr.selected:hover {
+    background-color: $brd-color;
+  }
+  tbody tr,
+  tbody tr.selected,
+  tbody tr.table-scroll,
+  tbody tr.table-scroll:hover{
+    border-color:$brd-color;
+  }
+  tbody tr{
+    background-color:$bg-color;
+    color:$color;
+    border-color:$brd-color;
+  }
+  tbody tr:hover{
+    background-color:$brd-color;
+  }
+}
+
+
+//DATA TABLE
+@mixin TableData($color, $color-active){
+  thead,
+  tfoot{
+    background-color:transparent;
+  }
+  
+  .dataTables_scrollHead,
+  .dataTables_scrollFoot{
+    background-color:$color-active;
+    color:lighten($color, 40%)
+  }
+  
+  .dataTables_paginate{
+    
+    a{
+      color:darken($color-active, 50%);
+      &.paginate_button:hover{
+        background-color:lighten($color, 40%);
+        color:darken($color-active, 80%);
+      }
+      &.paginate_button.previous:hover,
+      &.paginate_button.next:hover{
+        background-color:transparent;
+      }
+      &.paginate_button.current{
+        background-color:darken($color-active, 8%);
+        color:lighten($color, 40%)
+        
+      }
+    }
+  }
+}
+
+//PAGINATION
+@mixin Pagination($bg-color, $color, $bg-active, $color-active){
+  > li > a,
+  > li > span {
+    color: $color;
+    background-color: $bg-color;
+    border:1px solid darken($bg-color, 15%);
+  }
+  
+  > li > a,
+  > li > span {
+  &:hover,
+  &:focus {
+    background-color: darken($bg-color, 5%);
+  }
+  }
+  
+  > .active > a,
+  > .active > span {
+  &,
+  &:hover,
+  &:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: $bg-active;
+    border-color: darken($bg-active, 5%);
+    color:$color-active;
+  }
+  }
+  
+  > .disabled {
+  > span,
+  > span:hover,
+  > span:focus,
+  > a,
+  > a:hover,
+  > a:focus {
+    color:fade($color, 50%);
+    background-color: $bg-color;
+    cursor: not-allowed;
+  }
+  }
+}
+
+//PAGER
+@mixin Pager($bg-color, $color, $bg-hover, $color-hover){
+  li {
+    > a,
+    > span {
+    color:$color;
+    background-color: $bg-color;
+    border: 1px solid darken($bg-color, 15%);
+    }
+    > a:hover,
+    > a:focus {
+    color:$color-hover;
+    background-color: $bg-hover;
+    border-color: darken($bg-hover, 15%);
+    }
+  }
+}
+
+//DATETIMEPICKER
+@mixin DateTimePicker($bg-color, $color, $bg-active, $color-active){
+  //-webkit-border-radius:$radius-s;
+  //-moz-border-radius:$radius-s;
+  //border-radius:$radius-s;
+  background-color:$bg-color;
+  color:$color;
+  box-shadow:0 0 5px $color-default;
+  border:1px solid darken($bg-color, 15%);
+  &:before{
+    border-bottom:7px solid darken($bg-color, 10%);
+  }
+  &:after{
+    border-bottom:6px solid $bg-color;
+  }
+  .timepicker-picker{
+    .wi-btn{
+      background-color:$bg-active;
+      color:$color-active;
+      border-color:darken($bg-active, 3%);
+      border-radius:$btn-radius;
+      &:hover{
+        background-color:darken($bg-active, 3%);
+        color:$color-active;
+      }
+    }
+  }
+  .picker-switch{
+    a{
+      color:$color;
+      border-color:darken($bg-color, 10%);
+    }
+  }
+  table{
+    width:100%;
+    margin:0;
+    td,
+    th{
+      -webkit-border-radius:4px;
+      -moz-border-radius:4px;
+      border-radius:4px;
+      &.day:hover,
+      &.hour:hover,
+      &.minute:hover,
+      &.second:hover{
+        background:darken($bg-color, 10%);
+        color:$color;
+      }
+    }
+    td{
+      &.old,
+      &.new{
+        color:fade($color, 50%);
+      }
+      
+      &.current{
+        span{
+          color:$color-dark;
+          background-color:fade($color-warning, 10%);
+        }
+      }
+      &.active,
+      &.active:hover{
+        color:$color-active;
+        background-color:$bg-active;
+        span{
+          color:$color-active;
+          background-color:$bg-active;
+        }
+      }
+      &.active:hover,
+      &.active:hover:hover,
+      &.active:active,
+      &.active:hover:active,
+      &.active.active,
+      &.active:hover.active,
+      &.active.disabled,
+      &.active:hover.disabled,
+      &.active[disabled],
+      &.active:hover[disabled]{
+        color:$color-active;
+        background-color:$bg-active;
+      }
+      &.active:active,
+      &.active:hover:active,
+      &.active.active,
+      &.active:hover.active{
+        color:$color-active;
+        background-color:$bg-active;
+      }
+      &.disabled,
+      &.disabled:hover{
+        color:fade($color, 50%);
+      }
+      span{
+        -webkit-border-radius:4px;
+        -moz-border-radius:4px;
+        border-radius:4px;
+        &:hover{
+          background:darken($bg-color, 10%);
+        }
+        &.active,
+        &.active:active,
+        &.active.active,
+        &.active:hover,
+        &.active:active,
+        &.active.active,
+        &.active.disabled,
+        &.active[disabled]{
+          color:$color-active;
+          background-color:$bg-active;
+        }
+        &.old{
+          color:fade($color, 50%);
+        }
+        &.disabled,
+        &.disabled:hover{
+          color:fade($color, 50%);
+        }
+      }
+    }
+    th{
+      &.disabled,
+      &.disabled:hover{
+        color:fade($color, 50%);
+      } 
+    }
+    thead{
+      tr{
+        &:first-child{
+          th{
+            &.next,
+            &.prev{
+              cursor:pointer;
+              &:hover{
+                background:transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

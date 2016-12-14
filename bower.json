@@ -1,0 +1,29 @@
+{
+  "name": "wibone",
+  "description": "mobile first framework",
+  "keywords": [
+    "css",
+    "js",
+    "less",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
+  ],
+  "authors": [
+    "webinspire"
+  ],
+  "homepage": "dev.webinspire.it/wibone",
+  "license": "MIT",
+  "moduleType": "globals",
+  "main": [
+    "wibone.css",
+    "skin.css",
+    "js/components.min.js",
+    "js/script.js"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1 - 2"
+  }
+}
