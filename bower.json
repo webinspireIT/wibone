@@ -18,9 +18,9 @@
   "license": "MIT",
   "moduleType": "globals",
   "main": [
-    "css/wibone.css",
-	"skin/skin.less",
-    "js/components.min.js"
+    "wibone.css",
+    "components.min.js",
+    "script.js"
   ],
   "dependencies": {
     "jquery": "1.9.1 - 2"
